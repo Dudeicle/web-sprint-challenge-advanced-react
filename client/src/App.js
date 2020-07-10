@@ -25,17 +25,17 @@ function App() {
     <div>
       <Router>
         <nav className="container">
-          <h1>
+          <h1 data-testid="reactPlantsid">
             React Plants <span role="img">🌿</span>
           </h1>
           <ul className="steps">
             <li>
-              <NavLink exact to="/">
+              <NavLink exact to="/" data-testid="plantsid">
                 Plants
               </NavLink>
             </li>
             <li>
-              <NavLink to="/cart">
+              <NavLink to="/cart" data-testid="cartid">
                 Cart
                 <span className="cart-badge">
                   {cart.length > 0 && cart.length}
