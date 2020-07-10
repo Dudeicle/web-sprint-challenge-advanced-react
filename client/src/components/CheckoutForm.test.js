@@ -57,14 +57,25 @@ const cartLink = screen.getByTestId('cartid');
 // intention with this test is to go into plantsLink, add a plant to cart then go into cart and check that it is there
 
 fireEvent.click(plantsLink);
+const plantsPage = await screen.findAllByRole('button', [0])
+console.log(plantsPage)
+// fireEvent.click(plantsPage)
 
 
+// const addToCard = screen.getAllByRole('button');
 
 });
+
+
 
 test("form shows success message on submit with form details", async() => {
    
 render(<CheckoutForm />);
+
+// showing the header for the FORM below
+
+const header = screen.getByText(/checkout form/i)
+
 
 // Arrange -------------------------------------------------------------------
 // type into all three inputs
