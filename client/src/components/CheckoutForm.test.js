@@ -1,5 +1,6 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, } from "@testing-library/react";
+import userEvent from '@testing-library/user-event';
 
 import App from '../App.js';
 import CheckoutForm from "./CheckoutForm";
@@ -56,13 +57,30 @@ const cartLink = screen.getByTestId('cartid');
 // extra testing ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // intention with this test is to go into plantsLink, add a plant to cart then go into cart and check that it is there
 
-fireEvent.click(plantsLink);
-const plantsPage = await screen.findAllByRole('button', [0])
-console.log(plantsPage)
-// fireEvent.click(plantsPage)
+userEvent.click(plantsLink);
 
 
-// const addToCard = screen.getAllByRole('button');
+const addToCart = await screen.findAllByRole('button');
+console.log(addToCart);
+
+userEvent.click(addToCart[0]);
+userEvent.click(addToCart[1]);
+userEvent.click(addToCart[2]);
+
+
+userEvent.click(cartLink);
+
+const firstPlant = await screen.findByText(/peperomia rosso/i);
+expect(firstPlant).toBeInTheDocument();
+
+const secondPlant = await screen.findByText(/string of dolphins/i);
+expect(secondPlant).toBeInTheDocument();
+
+const thirdPlant = await screen.findByText(/snake plant/i);
+expect(thirdPlant).toBeInTheDocument();
+
+const totalPrice = await screen.findByText(/54/i);
+expect(totalPrice).toBeInTheDocument();
 
 });
 
