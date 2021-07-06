@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useForm } from '../hooks/useForm.js';
+
 const initialValue = {
   firstName: "",
   lastName: "",
@@ -15,11 +17,12 @@ const initialValue = {
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
+  // const [values, setValues] = useState(initialValue);
+  const [values, handleChanges, clearForm] = useForm(initialValue);
 
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  // const handleChanges = (e) => {
+  //   setValues({ ...values, [e.target.name]: e.target.value });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +33,7 @@ const CheckoutForm = (props) => {
     <>
       <form onSubmit={handleSubmit}>
         <h2>Checkout Form</h2>
+
         <label>
           First Name:
           <input
@@ -38,6 +42,7 @@ const CheckoutForm = (props) => {
             onChange={handleChanges}
           />
         </label>
+
         <label>
           Last Name:
           <input
@@ -46,6 +51,7 @@ const CheckoutForm = (props) => {
             onChange={handleChanges}
           />
         </label>
+
         <label>
           Address:
           <input
@@ -54,19 +60,35 @@ const CheckoutForm = (props) => {
             onChange={handleChanges}
           />
         </label>
+
         <label>
           City:
-          <input name="city" value={values.city} onChange={handleChanges} />
+          <input 
+            name="city" 
+            value={values.city} 
+            onChange={handleChanges} 
+          />
         </label>
+
         <label>
           State:
-          <input name="state" value={values.state} onChange={handleChanges} />
+          <input 
+            name="state" 
+            value={values.state} 
+            onChange={handleChanges} 
+          />
         </label>
+
         <label>
           Zip:
-          <input name="zip" value={values.zip} onChange={handleChanges} />
+          <input 
+            name="zip" 
+            value={values.zip} 
+            onChange={handleChanges} 
+          />
         </label>
-        <button>Checkout</button>
+
+        <button onClick={clearForm} onClick={handleSubmit}>Checkout</button>
       </form>
 
       {showSuccessMessage && (
